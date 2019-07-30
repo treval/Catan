@@ -53,7 +53,12 @@ class MainMenu extends Component {
                 </Menu.Item>,
         		<Menu.Item className="item" key="logout">
         			LOG OUT
-        		</Menu.Item>,        		
+        		</Menu.Item>,  
+                <Menu.Item className="item" key="/playground">
+                    <Link to="/playground">
+                        PLAYGROUND
+                    </Link>
+                </Menu.Item>,       		
         	];
         } else {
         	menuItems = [

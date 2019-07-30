@@ -20,6 +20,8 @@ import MainMenu from '../user/mainmenu/MainMenu';
 import GameList from '../user/gamelist/GameList';
 import Settings from '../user/settings/Settings';
 
+import HexGrid from '../game/gameboard/HexGrid';
+
 import CreateGame from '../game/creategame/CreateGame';
 import GameBoard from '../game/gameboard/GameBoard';
 
@@ -124,6 +126,11 @@ class App extends Component {
                   isAuthenticated={this.state.isAuthenticated}
                   currentUser={this.state.currentUser} {...props} />}>
               </Route>
+              <Route path="/game/:gameid"
+                render={(props) => <GameBoard
+                  isAuthenticated={this.state.isAuthenticated}
+                  currentUser={this.state.currentUser} {...props} />}>
+              </Route>
               <Route path="/newgame"
                 render={(props) => <CreateGame 
                   isAuthenticated={this.state.isAuthenticated}
@@ -133,6 +140,9 @@ class App extends Component {
                 render={(props) => <Settings
                   isAuthenticated={this.state.isAuthenticated}
                   currentUser={this.state.currentUser} {...props} />}>
+              </Route>
+              <Route path="/playground">
+                <HexGrid/>
               </Route>
               <Route component={NotFound}></Route>
               </Switch>

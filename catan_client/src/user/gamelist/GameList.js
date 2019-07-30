@@ -61,13 +61,30 @@ class GameList extends Component {
     }
 
 	render() {
+        console.log(this.state.games);
 		return(
 			<div>
 				{
 					this.state.games ? (
 						<div>
-							<div>{JSON.stringify(this.state.games.ids)}</div>
-                            <div>{JSON.stringify(this.state.games.users)}</div>                            
+                            <List
+                                header={<div>Header</div>}
+                                footer={<div>Footer</div>}
+                                bordered
+                                dataSource={this.state.games.ids}
+                                style={{
+                                    height: '500px',
+                                    overflow: 'auto',
+                                    marginTop: '100px'
+                                }}
+                                renderItem={item => (
+                                    <List.Item>
+                                        <Link to={"/game/"+item}>
+                                            {item}
+                                        </Link>
+                                    </List.Item>
+                                )}
+                            />
 						</div>
 					) : null
 				}

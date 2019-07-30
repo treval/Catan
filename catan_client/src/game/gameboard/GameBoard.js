@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
 import LoadingIndicator  from '../../common/LoadingIndicator';
+import HexGrid from './HexGrid'
 
 import { getGameById } from '../../util/APIUtils';
 
@@ -49,31 +50,18 @@ class GameBoard extends Component {
 	}
 
 	componentDidMount() {
-        const gameid = 19;
-        this.loadGameBoard(gameid);
+        this.loadGameBoard(this.props.match.params.gameid);
     }
 
 	render() {
 		return(
-			<div>
+			<div gameboard-container>
 				{
 					this.state.game ? (
-						<div>
-							<div>GAME: {JSON.stringify(this.state.game.id)}</div>
-							<div>USER STATUSES: {JSON.stringify(this.state.game.userStatuses)}</div>
-							<div>GAME STATUS:</div>
-							<div>WOOD: {JSON.stringify(this.state.game.wood)}</div>
-							<div>BRICK: {JSON.stringify(this.state.game.brick)}</div>
-							<div>WHEAT: {JSON.stringify(this.state.game.wheat)}</div>
-							<div>SHEEP: {JSON.stringify(this.state.game.sheep)}</div>
-							<div>STONE: {JSON.stringify(this.state.game.stone)}</div>
-							<div>VICTORY CARDS: {JSON.stringify(this.state.game.victoryCards)}</div>
-							<div>KNIGHTS: {JSON.stringify(this.state.game.knight)}</div>
-							<div>ROAD BUILDING: {JSON.stringify(this.state.game.roadBuilding)}</div>
-							<div>MONOPOLY: {JSON.stringify(this.state.game.monopoly)}</div>
-							<div>YEAR OF PLENTY: {JSON.stringify(this.state.game.yearOfPlenty)}</div>
-							<div>HEXES: {JSON.stringify(this.state.game.hexes)}</div>
-						</div>
+						<HexGrid 
+							className='board'
+							game={this.state.game}
+						/>
 					) : null
 				}
 			</div>
