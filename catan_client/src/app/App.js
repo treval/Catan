@@ -20,8 +20,6 @@ import MainMenu from '../user/mainmenu/MainMenu';
 import GameList from '../user/gamelist/GameList';
 import Settings from '../user/settings/Settings';
 
-import HexGrid from '../game/gameboard/HexGrid';
-
 import CreateGame from '../game/creategame/CreateGame';
 import GameBoard from '../game/gameboard/GameBoard';
 
@@ -99,56 +97,52 @@ class App extends Component {
       return <LoadingIndicator />
     }
     return (
-        <Layout className="app-container">
-          <Content className="app-content">
-            <div className="container">
-              <Switch>    
-              <Route exact path="/" 
-                render={(props) => <MainMenu isAuthenticated={this.state.isAuthenticated} 
-                    currentUser={this.state.currentUser} onLogout={this.handleLogout} {...props} />}>
-              </Route>                   
-              <Route path="/login" 
-                  render={(props) => <Login onLogin={this.handleLogin} {...props} />}>
-              </Route>
-              <Route path="/signup" component={Signup}></Route>
-              <Route path="/users/:username" 
-                render={(props) => <Profile 
-                  isAuthenticated={this.state.isAuthenticated} 
-                  currentUser={this.state.currentUser} {...props}  />}>
-              </Route>
-              <Route path="/gamelist/:userid"
-                render={(props) => <GameList
-                  isAuthenticated={this.state.isAuthenticated}
-                  currentUser={this.state.currentUser} {...props} />}>
-              </Route>
-              <Route path="/gameboardtest"
-                render={(props) => <GameBoard
-                  isAuthenticated={this.state.isAuthenticated}
-                  currentUser={this.state.currentUser} {...props} />}>
-              </Route>
-              <Route path="/game/:gameid"
-                render={(props) => <GameBoard
-                  isAuthenticated={this.state.isAuthenticated}
-                  currentUser={this.state.currentUser} {...props} />}>
-              </Route>
-              <Route path="/newgame"
-                render={(props) => <CreateGame 
-                  isAuthenticated={this.state.isAuthenticated}
-                  currentUser={this.state.currentUser} {...props} />}>
-              </Route>
-              <Route path="/settings"
-                render={(props) => <Settings
-                  isAuthenticated={this.state.isAuthenticated}
-                  currentUser={this.state.currentUser} {...props} />}>
-              </Route>
-              <Route path="/playground">
-                <HexGrid/>
-              </Route>
-              <Route component={NotFound}></Route>
-              </Switch>
-            </div>
-          </Content>
-        </Layout>
+      <div>
+        <Switch>    
+        <Route exact path="/" 
+          render={(props) => <MainMenu isAuthenticated={this.state.isAuthenticated} 
+              currentUser={this.state.currentUser} onLogout={this.handleLogout} {...props} />}>
+        </Route>                   
+        <Route path="/login" 
+            render={(props) => <Login onLogin={this.handleLogin} {...props} />}>
+        </Route>
+        <Route path="/signup" component={Signup}></Route>
+        <Route path="/users/:username" 
+          render={(props) => <Profile 
+            isAuthenticated={this.state.isAuthenticated} 
+            currentUser={this.state.currentUser} {...props}  />}>
+        </Route>
+        <Route path="/gamelist/:userid"
+          render={(props) => <GameList
+            isAuthenticated={this.state.isAuthenticated}
+            currentUser={this.state.currentUser} {...props} />}>
+        </Route>
+        <Route path="/gameboardtest"
+          render={(props) => <GameBoard
+            isAuthenticated={this.state.isAuthenticated}
+            currentUser={this.state.currentUser} {...props} />}>
+        </Route>
+        <Route path="/game/:gameid"
+          render={(props) => <GameBoard
+            isAuthenticated={this.state.isAuthenticated}
+            currentUser={this.state.currentUser} {...props} />}>
+        </Route>
+        <Route path="/newgame"
+          render={(props) => <CreateGame 
+            isAuthenticated={this.state.isAuthenticated}
+            currentUser={this.state.currentUser} {...props} />}>
+        </Route>
+        <Route path="/settings"
+          render={(props) => <Settings
+            isAuthenticated={this.state.isAuthenticated}
+            currentUser={this.state.currentUser} {...props} />}>
+        </Route>
+        <Route path="/playground">
+          <GameBoard />
+        </Route>
+        <Route component={NotFound}></Route>
+        </Switch>
+      </div>
     );
   }
 }
