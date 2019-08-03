@@ -6,20 +6,6 @@ import {
     withRouter
 } from 'react-router-dom';
 
-export type SceneEventArgs = {
-  engine: BABYLON.Engine,
-  scene: BABYLON.Scene,
-  canvas: HTMLCanvasElement
-};
-
-export type SceneProps = {
-  engineOptions?: BABYLON.EngineOptions,
-  adaptToDeviceRatio?: boolean,
-  onSceneMount?: (args: SceneEventArgs) => void,
-  width?: number,
-  height?: number
-};
-
 class BabylonScene extends Component {
   constructor(props) {
     super(props);
@@ -45,15 +31,11 @@ class BabylonScene extends Component {
     let scene = new BABYLON.Scene(this.engine);
     this.scene = scene;
 
-    if (typeof this.props.onSceneMount === 'function') {
-      this.props.onSceneMount({
-        scene,
-        engine: this.engine,
-        canvas: this.canvas
-      });
-    } else {
-      console.error('onSceneMount function not available');
-    }
+    this.props.onSceneMount({
+      scene,
+      engine: this.engine,
+      canvas: this.canvas
+    });
 
     // Resize the babylon engine when the window is resized
     window.addEventListener('resize', this.onResizeWindow);
@@ -63,7 +45,7 @@ class BabylonScene extends Component {
     window.removeEventListener('resize', this.onResizeWindow);
   }
 
-  onCanvasLoaded = (c : HTMLCanvasElement) => {
+  onCanvasLoaded = (c) => {
     if (c !== null) {
       this.canvas = c;
     }
@@ -74,11 +56,18 @@ class BabylonScene extends Component {
     // (id, className, etc.)
     let { width, height, ...rest } = this.props;
 
-    let opts: any = {};
+    let opts = {};
+
+    if (width !== undefined && height !== undefined) {
+      opts.width = width;
+      opts.height = height;
+    }
+
+    opts.game = this.props.game;
 
     return (
       <canvas
-        style={{width: '100vw', height: '100vh', margin: 'auto'}}
+        {...opts}
         ref={this.onCanvasLoaded}
       />
     )
