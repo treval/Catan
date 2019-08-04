@@ -69,6 +69,7 @@ class BabylonScene extends Component {
       <canvas
         {...opts}
         ref={this.onCanvasLoaded}
+        style = {{width: '98vw', height: '96vh', position: 'relative', margin: '5px 5px'}}
       />
     )
   }

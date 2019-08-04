@@ -113,8 +113,8 @@ class GameBoard extends Component {
 		        		this.state.game ?
 				            <BabylonScene 
 				            	onSceneMount={this.onSceneMount}
-				            	width='1500'
-				            	height='850'
+				            	width='1200'
+				            	height='800'
 				            	game={this.state.game}
 				            /> : <div>Loading Game...</div>
 				        
