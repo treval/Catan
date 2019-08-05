@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import BabylonScene from './BabylonScene.js';
 
-export function buildHex(x, y, resource, probability, scene) {
+export function buildHex(x, y, HexObject, scene) {
 	// Color Materials
 
 	var darkgreen = new BABYLON.StandardMaterial("darkgreen", scene);
@@ -25,8 +25,9 @@ export function buildHex(x, y, resource, probability, scene) {
 	var hex = BABYLON.DiscBuilder.CreateDisc("Hex", {tessellation: 6}, scene);
     hex.position = new BABYLON.Vector3(x, 0.01, y);
     hex.rotation = new BABYLON.Vector3(Math.PI/2, Math.PI/2, Math.PI/2);
-    
-    switch(resource) {
+    hex.actionManager = new BABYLON.ActionManager(scene);
+
+    switch(HexObject.resource) {
     	case "wood":
     		hex.material=darkgreen;
     		break;
@@ -49,23 +50,35 @@ export function buildHex(x, y, resource, probability, scene) {
     		break;
     };
 
-    if (probability !== 0) {
+    if (HexObject.probability !== 0) {
         var probTile = BABYLON.DiscBuilder.CreateDisc("probTile", {radius: 0.1}, scene);
         probTile.position = new BABYLON.Vector3(x, 0.02, y);
         probTile.rotation = new BABYLON.Vector3(Math.PI/2, Math.PI/2, Math.PI);
 
         var probText = new BABYLON.DynamicTexture("probText", 256, scene);
 
-        if (probability === 6 | probability === 8)
-            probText.drawText(probability, 60, 150, "bold 180px monospace", 'red', '#dbc3a3', false, true);
-        else if ((probability !== 6 & probability !== 8) & probability < 10)
-            probText.drawText(probability, 60, 150, "bold 180px monospace", 'black', '#dbc3a3', false, true);
+        if (HexObject.probability === 6 | HexObject.probability === 8)
+            probText.drawText(HexObject.probability, 60, 150, "bold 180px monospace", 'red', '#dbc3a3', false, true);
+        else if ((HexObject.probability !== 6 & HexObject.probability !== 8) & HexObject.probability < 10)
+            probText.drawText(HexObject.probability, 60, 150, "bold 180px monospace", 'black', '#dbc3a3', false, true);
         else
-            probText.drawText(probability, 40, 150, "bold 180px monospace", 'black', '#dbc3a3', false, true);
+            probText.drawText(HexObject.probability, 40, 150, "bold 180px monospace", 'black', '#dbc3a3', false, true);
 
         var probTextMaterial = new BABYLON.StandardMaterial("probTextMaterial", scene);
         probTextMaterial.diffuseTexture = probText;
 
         probTile.material = probTextMaterial;
     }
+
+    hex.actionManager.registerAction(
+        new BABYLON.ExecuteCodeAction(
+            {
+                trigger: BABYLON.ActionManager.OnPickTrigger,
+            },
+            function () { 
+                console.log(JSON.stringify(HexObject.edges)); 
+            }
+        )
+    );
+
 };

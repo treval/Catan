@@ -179,7 +179,8 @@ public class GameService {
     		Hex hex = hexes.get(i);
     		if (!hex.getResource().equals("desert") && hex.getProbability()==0) {
     			hex.setProbability(probSwitch);
-    		}
+    		} else if (hex.getResource().equals("desert")) 
+                hex.setThief(true);
     	}
     	
     	for (int i = 0; i < 54; i++) {
