@@ -68,18 +68,4 @@ export function buildHex(x, y, resource, probability, scene) {
 
         probTile.material = probTextMaterial;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 };

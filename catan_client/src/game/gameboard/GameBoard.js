@@ -19,6 +19,7 @@ import { List } from 'antd';
 import { buildHex } from './Hex.js';
 import { buildEdge } from './Edge.js';
 import { buildNode } from './Node.js';
+import { buildHand } from './PlayerHand.js';
 
 class GameBoard extends Component {
 	constructor(props) {
@@ -180,6 +181,11 @@ class GameBoard extends Component {
             }
         }
 
+        buildHand(scene, "south");
+        buildHand(scene, "east");
+        buildHand(scene, "west");
+        buildHand(scene, "north");
+
         // Render Loop
         engine.runRenderLoop(() => {
             if (scene) {
@@ -218,7 +224,7 @@ class GameBoard extends Component {
 
 	render() {
 		return(
-			<div>
+			<div style={{overflow: 'hidden', height: '800px'}}>
 		        <div>
 		        	{	
 		        		this.state.game ?
@@ -230,7 +236,31 @@ class GameBoard extends Component {
 				            /> : <div>Loading Game...</div>
 				        
 		        	}
-		        </div>	
+		        </div>
+                <div 
+                    style={{
+                        width: '400px', 
+                        height: '200px', 
+                        position: 'relative', 
+                        backgroundColor: '#99badd', 
+                        bottom: '250px',
+                        left: '50px'
+                    }}
+                >
+                    Player Hand Here
+                </div>
+                <div 
+                    style={{
+                        width: '200px', 
+                        height: '400px', 
+                        position: 'relative', 
+                        backgroundColor: 'red', 
+                        bottom: '975px',
+                        left: '1200px'
+                    }}
+                >
+                   Chat/Game Log
+                </div>    	
 			</div>
 		)
 	}
