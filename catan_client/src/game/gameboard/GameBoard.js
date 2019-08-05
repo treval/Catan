@@ -18,6 +18,7 @@ import { List } from 'antd';
 
 import { buildHex } from './Hex.js';
 import { buildEdge } from './Edge.js';
+import { buildNode } from './Node.js';
 
 class GameBoard extends Component {
 	constructor(props) {
@@ -67,7 +68,117 @@ class GameBoard extends Component {
         		}
         }
 
-        buildEdge()
+        for (let i=0; i<6; i++) {
+            if (i===0 | i===5) {
+                for (let j=0; j<7; j++) {
+                    if (j%2!==0) {
+                        buildNode(scene, (i*0.84)-2.5, (j*0.45)-1.45);
+                    } else {
+                        if (i===0) {
+                            buildNode(scene, (i*0.84)-2.3, (j*0.45)-1.45);
+                        } else {
+                            buildNode(scene, (i*0.84)-2.7, (j*0.45)-1.45);
+                        }
+                    }
+                }
+            } else if (i===1 | i===4) {
+                for (let j=0; j<9; j++) {
+                    if (j%2!==0) {
+                        buildNode(scene, (i*0.84)-2.5, (j*0.45)-1.9);
+                    } else {
+                        if (i===1) {
+                            buildNode(scene, (i*0.84)-2.3, (j*0.45)-1.9);
+                        } else {
+                            buildNode(scene, (i*0.84)-2.7, (j*0.45)-1.9);
+                        }
+                    }
+                }
+            } else if (i===2 | i===3) {
+                for (let j=0; j<11; j++) {
+                    if (j%2!==0) {
+                        buildNode(scene, (i*0.84)-2.5, (j*0.45)-2.35);
+                    } else {
+                        if (i===2) {
+                            buildNode(scene, (i*0.84)-2.3, (j*0.45)-2.35);
+                        } else {
+                            buildNode(scene, (i*0.84)-2.7, (j*0.45)-2.35);
+                        }
+                    }
+                }
+            }
+        }
+
+        for (let i=0; i<11; i++) {
+            if (i===0) {
+                for (let j=0; j<6; j++) {
+                    if (j%2===0) {
+                        buildEdge(scene, (j*0.45)-1.4, i-2.3, false, "upslant");
+                    } else {
+                        buildEdge(scene, (j*0.45)-1.4, i-2.5, false, "downslant");
+                    }
+                }
+            } else if (i===1) {
+                for (let j=0; j<4; j++) {
+                    buildEdge(scene, (j*0.88)-1.48, i-2.8, false, "side");
+                }
+            } else if (i===2) {
+                for (let j=0; j<8; j++) {
+                    if (j%2===0) {
+                        buildEdge(scene, (j*0.45)-1.85, i-3.55, false, "upslant");
+                    } else {
+                        buildEdge(scene, (j*0.45)-1.85, i-3.75, false, "downslant");
+                    }
+                }
+            } else if (i===3) {
+                for (let j=0; j<5; j++) {
+                    buildEdge(scene, (j*0.88)-1.92, i-4, false, "side");
+                }
+            } else if (i===4) {
+                for (let j=0; j<10; j++) {
+                    if (j%2===0) {
+                        buildEdge(scene, (j*0.45)-2.3, i-4.7, false, "upslant");
+                    } else {
+                        buildEdge(scene, (j*0.45)-2.3, i-4.9, false, "downslant");
+                    }
+                }
+            } else if (i===5) {
+                for (let j=0; j<6; j++) {
+                    buildEdge(scene, (j*0.88)-2.35, i-5.22, false, "side");
+                }
+            } else if (i===6) {
+                for (let j=0; j<10; j++) {
+                    if (j%2!==0) {
+                        buildEdge(scene, (j*0.45)-2.3, i-5.95, false, "upslant");
+                    } else {
+                        buildEdge(scene, (j*0.45)-2.3, i-6.15, false, "downslant");
+                    }
+                }      
+            } else if (i==7) {
+                for (let j=0; j<5; j++) {
+                    buildEdge(scene, (j*0.88)-1.92, i-6.4, false, "side");
+                }
+            } else if (i===8) {
+                for (let j=0; j<8; j++) {
+                    if (j%2!==0) {
+                        buildEdge(scene, (j*0.45)-1.85, i-7.15, false, "upslant");
+                    } else {
+                        buildEdge(scene, (j*0.45)-1.85, i-7.35, false, "downslant");
+                    }
+                }
+            } else if (i===9) {
+                for (let j=0; j<4; j++) {
+                    buildEdge(scene, (j*0.88)-1.46, i-7.6, false, "side");
+                }
+            } else if (i===10) {
+                for (let j=0; j<6; j++) {
+                    if (j%2!==0) {
+                        buildEdge(scene, (j*0.45)-1.4, i-8.4, false, "upslant");
+                    } else {
+                        buildEdge(scene, (j*0.45)-1.4, i-8.6, false, "downslant");
+                    }
+                }                
+            }
+        }
 
         // Render Loop
         engine.runRenderLoop(() => {

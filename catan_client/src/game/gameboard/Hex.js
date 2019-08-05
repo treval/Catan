@@ -11,7 +11,7 @@ export function buildHex(x, y, resource, probability, scene) {
 	maroon.diffuseColor = new BABYLON.Color3.FromHexString('#800000');
 
 	var yellow = new BABYLON.StandardMaterial("yellow", scene);
-	yellow.diffuseColor = new BABYLON.Color3.FromHexString('#cccc00')
+	yellow.diffuseColor = new BABYLON.Color3.FromHexString('#cccc00');
 
 	var lightgreen = new BABYLON.StandardMaterial("lightgreen", scene);
 	lightgreen.diffuseColor = new BABYLON.Color3.FromHexString('#66ff66');
