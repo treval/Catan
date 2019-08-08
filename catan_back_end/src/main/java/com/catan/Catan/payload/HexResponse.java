@@ -9,8 +9,6 @@ public class HexResponse {
 	private String resource;
 	private int probability;
 	private boolean thief;
-	private List<NodeResponse> nodes;
-	private List<EdgeResponse> edges;
 	
 	public long getId() {
 		return id;
@@ -41,18 +39,6 @@ public class HexResponse {
 	}
 	public void setThief(boolean thief) {
 		this.thief = thief;
-	}
-	public List<NodeResponse> getNodes() {
-		return nodes;
-	}
-	public void setNodes(List<NodeResponse> nodes) {
-		this.nodes = nodes;
-	}
-	public List<EdgeResponse> getEdges() {
-		return edges;
-	}
-	public void setEdges(List<EdgeResponse> edges) {
-		this.edges = edges;
 	}
 	
 }

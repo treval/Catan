@@ -6,6 +6,7 @@ public class GameResponse {
 
 	private Long id;
 	private List<UserStatusResponse> userStatuses;
+	private List<NodeResponse> nodes;
 	private List<HexResponse> hexes;
 	private int wood = 19;
 	private int brick = 19;
@@ -90,9 +91,17 @@ public class GameResponse {
 	public void setYearOfPlenty(int yearOfPlenty) {
 		this.yearOfPlenty = yearOfPlenty;
 	}
-	public List<HexResponse> getHexes() {
-		return hexes;
+	public List<NodeResponse> getNodes() {
+		return nodes;
 	}
+	public void setNodes(List<NodeResponse> nodes) {
+		this.nodes = nodes;
+	}
+
+	public List<HexResponse> getHexes() {
+		return this.hexes;
+	}
+
 	public void setHexes(List<HexResponse> hexes) {
 		this.hexes = hexes;
 	}

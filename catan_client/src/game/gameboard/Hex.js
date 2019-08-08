@@ -22,9 +22,9 @@ export function buildHex(x, y, HexObject, scene) {
 	var tan = new BABYLON.StandardMaterial("tan", scene);
 	tan.diffuseColor = new BABYLON.Color3.FromHexString('#bf8040');
 
-	var hex = BABYLON.DiscBuilder.CreateDisc("Hex", {tessellation: 6}, scene);
+	var hex = BABYLON.DiscBuilder.CreateDisc("Hex", {tessellation: 6, radius: 0.55}, scene);
     hex.position = new BABYLON.Vector3(x, 0.01, y);
-    hex.rotation = new BABYLON.Vector3(Math.PI/2, Math.PI/2, Math.PI/2);
+    hex.rotation = new BABYLON.Vector3(Math.PI/2, Math.PI/2, 0);
     hex.actionManager = new BABYLON.ActionManager(scene);
 
     switch(HexObject.resource) {
@@ -53,7 +53,7 @@ export function buildHex(x, y, HexObject, scene) {
     if (HexObject.probability !== 0) {
         var probTile = BABYLON.DiscBuilder.CreateDisc("probTile", {radius: 0.1}, scene);
         probTile.position = new BABYLON.Vector3(x, 0.02, y);
-        probTile.rotation = new BABYLON.Vector3(Math.PI/2, Math.PI/2, Math.PI);
+        probTile.rotation = new BABYLON.Vector3(Math.PI/2, 0, 0);
 
         var probText = new BABYLON.DynamicTexture("probText", 256, scene);
 
@@ -70,15 +70,5 @@ export function buildHex(x, y, HexObject, scene) {
         probTile.material = probTextMaterial;
     }
 
-    hex.actionManager.registerAction(
-        new BABYLON.ExecuteCodeAction(
-            {
-                trigger: BABYLON.ActionManager.OnPickTrigger,
-            },
-            function () { 
-                console.log(JSON.stringify(HexObject.edges)); 
-            }
-        )
-    );
 
 };

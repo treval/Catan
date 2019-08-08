@@ -40,22 +40,29 @@ public class Game {
     private List<UserStatus> userStatuses = new ArrayList<>();
     
     @OneToMany(
-            mappedBy = "game",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true
+        mappedBy = "game",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.EAGER,
+        orphanRemoval = true
     )
-    @Size(min = 0, max = 19)
+    @Fetch(FetchMode.SELECT)
+    @BatchSize(size = 30)
+    private List<Node> nodes = new ArrayList<>();
+
+    @OneToMany(
+        mappedBy = "game",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.EAGER,
+        orphanRemoval = true
+    )
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 30)
     private List<Hex> hexes = new ArrayList<>();
     
-    
-    
 	public Long getId() {
 		return id;
 	}
-	
+
 	public int getWood() {
 		return wood;
 	}
@@ -148,6 +155,14 @@ public class Game {
 		this.userStatuses = userStatuses;
 	}
 
+	public List<Node> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<Node> nodes) {
+		this.nodes = nodes;
+	}
+	
 	public List<Hex> getHexes() {
 		return hexes;
 	}
