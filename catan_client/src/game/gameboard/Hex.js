@@ -22,7 +22,7 @@ export function buildHex(x, y, HexObject, scene) {
 	var tan = new BABYLON.StandardMaterial("tan", scene);
 	tan.diffuseColor = new BABYLON.Color3.FromHexString('#bf8040');
 
-	var hex = BABYLON.DiscBuilder.CreateDisc("Hex", {tessellation: 6, radius: 0.55}, scene);
+	var hex = BABYLON.DiscBuilder.CreateDisc("hex", {tessellation: 6, radius: 0.55}, scene);
     hex.position = new BABYLON.Vector3(x, 0.01, y);
     hex.rotation = new BABYLON.Vector3(Math.PI/2, Math.PI/2, 0);
     hex.actionManager = new BABYLON.ActionManager(scene);
@@ -70,5 +70,8 @@ export function buildHex(x, y, HexObject, scene) {
         probTile.material = probTextMaterial;
     }
 
+    hex.data = {resource: HexObject.resource, probability: HexObject.probability, theif: HexObject.theif}
+
+    return hex;
 
 };

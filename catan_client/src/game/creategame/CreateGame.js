@@ -20,45 +20,34 @@ class CreateGame extends Component {
 	constructor(props) {
         super(props);
         this.state = {
-            usernames: {
-                value: ''
-            }
+            usernames: []
         }   
-        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onBlur = this.onBlur.bind(this);
 	}
 
-    handleInputChange(event) {
-        const target = event.target;
-        const inputName = target.name;        
-        const inputValue = target.value;
-
-        this.setState({
-            [inputName] : {
-                value: inputValue,
-            }
-        });
+    onBlur(e) {
+        e.preventDefault();
+        var currentUsers = this.state.usernames;
+        currentUsers.push({username: e.target.value});
+        this.setState(currentUsers);
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-    
-        const gameRequest = {
-            usernames: [{username:this.state.usernames.value}],
-        };
-        console.log(gameRequest);
-        createGame(gameRequest)
-        .then(response => {
-            notification.success({
-                message: 'Catan App',
-                description: "Game Initialization Successful! :)",
-            });          
-        }).catch(error => {
-            notification.error({
-                message: 'Catan App',
-                description: error.message || 'Sorry! Something went wrong. Please try again!'
+    handleSubmit(e) {
+        e.preventDefault();
+        console.log({usernames: this.state.usernames});
+        createGame({usernames: this.state.usernames})
+            .then(response => {
+                notification.success({
+                    message: 'Catan App',
+                    description: "Game Initialization Successful! :)",
+                });          
+            }).catch(error => {
+                notification.error({
+                    message: 'Catan App',
+                    description: error.message || 'Sorry! Something went wrong. Please try again!'
+                });
             });
-        });
     }
 
 	render() {
@@ -69,12 +58,27 @@ class CreateGame extends Component {
                     <Form onSubmit={this.handleSubmit} className="signup-form">
                         <FormItem label="Player 1">
                             <Input 
-                                size="large"
-                                name="usernames"
-                                autoComplete="off"
-                                placeholder="username"
-                                value={this.state.usernames.value} 
-                                onChange={(event) => this.handleInputChange(event)} />    
+                                placeholder="username" 
+                                onBlur={(e) => this.onBlur(e)}
+                            />
+                        </FormItem>
+                        <FormItem label="Player 2">
+                            <Input 
+                                placeholder="username" 
+                                onBlur={(e) => this.onBlur(e)}
+                            />
+                        </FormItem>
+                        <FormItem label="Player 3">
+                            <Input 
+                                placeholder="username" 
+                                onBlur={(e) => this.onBlur(e)}
+                            />
+                        </FormItem>
+                        <FormItem label="Player 4">
+                            <Input 
+                                placeholder="username" 
+                                onBlur={(e) => this.onBlur(e)}
+                            />
                         </FormItem>
                         <FormItem>
                             <Button type="primary" 

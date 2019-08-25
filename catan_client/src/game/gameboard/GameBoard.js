@@ -18,6 +18,7 @@ import { List } from 'antd';
 
 import { buildHand } from './PlayerHand.js';
 import { mapBoard } from './mapBoard.js';
+import { renderGameCards } from './GameCards.js';
 
 class GameBoard extends Component {
 	constructor(props) {
@@ -32,7 +33,6 @@ class GameBoard extends Component {
 	onSceneMount(e) {
         const { canvas, scene, engine } = e;
 
-        console.log(this.game);
         // Camera Configuration
         var camera = new BABYLON.ArcRotateCamera('camera', -Math.PI/2, 0, 12, BABYLON.Vector3.Zero(), scene)
         camera.attachControl(canvas, true);
@@ -48,11 +48,11 @@ class GameBoard extends Component {
 
         // mesh configuration
         mapBoard(this.game, scene);
-
-        buildHand(scene, "south");
-        buildHand(scene, "east");
-        buildHand(scene, "west");
-        buildHand(scene, "north");
+        renderGameCards(this.game, scene);
+        buildHand(scene, this.game, "south", this.game.userStatuses[0]);
+        buildHand(scene, this.game, "north", this.game.userStatuses[0]);
+        buildHand(scene, this.game, "west", this.game.userStatuses[0]);
+        buildHand(scene, this.game, "east", this.game.userStatuses[0]);
 
         // Render Loop
         engine.runRenderLoop(() => {

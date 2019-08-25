@@ -1,8 +1,19 @@
 import * as BABYLON from 'babylonjs';
 import BabylonScene from './BabylonScene.js';
 
-export function buildNode(x, y, hexes, scene) {
+export function buildNode(x, y, hexes, nodeData, scene) {
 	// Color Materials
+
+	var hexIds = [nodeData.tHexId, nodeData.bHexId, nodeData.lHexId, nodeData.rHexId];
+
+	var hexData = [];
+	hexes.forEach( (hex, idx) => {
+		hexIds.forEach( (id) => {
+			if (id === idx)
+				hexData.push(hex);
+		});
+	});
+
     var cb = new BABYLON.StandardMaterial("cb", scene);
     cb.diffuseColor = new BABYLON.Color3.FromHexString('#99badd');
     
@@ -19,9 +30,11 @@ export function buildNode(x, y, hexes, scene) {
 	            trigger: BABYLON.ActionManager.OnPickTrigger,
 	        },
 	        function () { 
-	        	console.log(hexes.tH, hexes.bH, hexes.lH, hexes.rH); 
+	        	console.log(hexData); 
 	        }
 	    )
 	);
+
+	return node;
 
 };

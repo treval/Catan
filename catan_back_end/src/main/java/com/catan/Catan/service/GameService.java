@@ -181,6 +181,26 @@ public class GameService {
     	nodes.get(5).setbHexId(new Long(2));    	
     	nodes.get(6).setrHexId(new Long(2));
     	
+    	nodes.get(7).setrHexId(new Long(3));
+    	nodes.get(8).setbHexId(new Long(8));
+    	nodes.get(9).settHexId(new Long(0));
+    	nodes.get(9).setlHexId(new Long(3));
+    	nodes.get(9).setrHexId(new Long(4));
+    	nodes.get(10).setbHexId(new Long(4));
+    	nodes.get(10).setlHexId(new Long(0));
+    	nodes.get(10).setrHexId(new Long(1));
+    	nodes.get(11).settHexId(new Long(1));
+    	nodes.get(11).setlHexId(new Long(4));
+    	nodes.get(11).setrHexId(new Long(5));
+    	nodes.get(12).setbHexId(new Long(5));
+    	nodes.get(12).setlHexId(new Long(1));
+    	nodes.get(12).setrHexId(new Long(2));
+    	nodes.get(13).settHexId(new Long(2));
+    	nodes.get(13).setlHexId(new Long(5));
+    	nodes.get(13).setrHexId(new Long(6));
+    	nodes.get(14).setbHexId(new Long(6));
+    	nodes.get(14).setlHexId(new Long(2));
+    	nodes.get(15).setlHexId(new Long(6));
 
     	
     	game.setNodes(nodes);
